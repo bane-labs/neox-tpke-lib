@@ -1,5 +1,14 @@
 # neox-tpke
 
+## 1.0.5
+
+### Patch Changes
+
+- - Extracted the neox-tpke lib from monorepo to a dedicated repo
+  - Created a DEVELOPMENT.md file
+  - Updated description and other metadata info in the package.json
+  - Added license file
+
 ## 1.0.4
 
 ### Patch Changes

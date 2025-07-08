@@ -1,12 +1,12 @@
 {
   "name": "neox-tpke",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Library for Threshold Public Key Encryption (TPKE) utilities in the NeoX ecosystem.",
   "keywords": [
     "neox",
     "tpke"
   ],
-  "repository": "https://github.com/bane-labs/neox-tpke.git",
+  "repository": "https://github.com/bane-labs/neox-tpke-lib.git",
   "main": "dist/neox-tpke.umd.js",
   "module": "dist/neox-tpke.mjs",
   "typings": "dist/index.d.ts",
