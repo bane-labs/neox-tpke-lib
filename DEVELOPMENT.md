@@ -57,6 +57,9 @@ This will install all dependencies including:
 - `npm run dev` - Build the package in watch mode for development
 - `npm run test` - Run the test suite
 - `npm run format` - Format code using Prettier
+- `npm run changeset` - Create a new changeset
+- `npm run changeset:version` - Consume changesets and update version
+- `npm run changeset:publish` - Publish packages to npm
 
 ### Development Mode
 
@@ -141,8 +144,14 @@ Before committing changes:
 2. Format code: `npm run format`
 3. Build successfully: `npm run build`
 4. Ensure no TypeScript errors
+5. **Create changeset**: If your changes should be included in the next release:
+   ```bash
+   npm run changeset
+   ```
 
-## Publishing to NPM
+## Release Management with Changesets
+
+This project uses [Changesets](https://github.com/changesets/changesets) for version management and publishing. Changesets provides a structured workflow for tracking changes, generating changelogs, and publishing releases.
 
 ### Prerequisites for Publishing
 
@@ -154,58 +163,127 @@ Before committing changes:
 3. **Build Status**: Ensure the package builds successfully
 4. **Tests Passing**: All tests must pass
 
-### Pre-publish Steps
+### Development Workflow with Changesets
 
-1. **Update Version**: Increment the version number in `package.json`
+#### 1. Making Changes
+
+When you make changes that should be included in the next release:
+
+1. **Make your code changes** in feature branches as usual
+2. **Create a changeset** to document the change:
+   ```bash
+   npm run changeset
+   ```
+3. **Follow the prompts**:
+   - Select the type of change (patch/minor/major)
+   - Provide a description of the change
+   - This creates a markdown file in `.changeset/` folder
+
+#### 2. Understanding Change Types
+
+- **Patch** (1.0.0 → 1.0.1): Bug fixes, documentation updates
+- **Minor** (1.0.0 → 1.1.0): New features, backward-compatible changes
+- **Major** (1.0.0 → 2.0.0): Breaking changes
+
+#### 3. Example Changeset Creation
+
+```bash
+$ npm run changeset
+🦋  Which packages would you like to include?
+● neox-tpke
+
+🦋  Which type of change is this for neox-tpke?
+○ patch   🩹  a bug fix
+● minor   ✨  a new feature
+○ major   💥  a breaking change
+
+🦋  Please enter a summary for this change
+Add support for new encryption algorithm
+
+🦋  === Summary ===
+- neox-tpke: minor
+```
+
+### Release Process
+
+#### 1. Prepare for Release
+
+When you're ready to publish accumulated changes:
+
+```bash
+# Update package versions and generate CHANGELOG
+npm run changeset:version
+```
+
+This command:
+
+- Consumes all changeset files
+- Updates `package.json` version according to changes
+- Updates `CHANGELOG.md` with release notes
+- Deletes consumed changeset files
+
+#### 2. Review Changes
+
+- Review the updated `package.json` version
+- Review the generated `CHANGELOG.md` entries
+- Commit the version changes:
+  ```bash
+  git add .
+  git commit -m "Version release"
+  git push origin main
+  ```
+
+#### 3. Publish to NPM
+
+```bash
+# Build the package
+npm run build
+
+# Publish to NPM registry
+npm run changeset:publish
+```
+
+This command:
+
+- Publishes the package to npm
+- Creates git tags for the new version
+- Pushes tags to the repository
+
+### Alternative: Manual Release Steps
+
+If you prefer manual control over the publishing process:
+
+1. **Prepare version**:
 
    ```bash
-   # For patch releases (bug fixes)
-   npm version patch
-
-   # For minor releases (new features)
-   npm version minor
-
-   # For major releases (breaking changes)
-   npm version major
+   npm run changeset:version
+   git add . && git commit -m "Version release"
    ```
 
-2. **Update Changelog**: Document changes in [`CHANGELOG.md`](CHANGELOG.md)
-
-3. **Final Build**: Create a clean production build
+2. **Build and test**:
 
    ```bash
    npm run build
-   ```
-
-4. **Final Tests**: Ensure all tests pass
-   ```bash
    npm run test
    ```
 
-### Publishing Process
-
-1. **Dry Run** (recommended): Test the publish process without actually publishing
+3. **Dry run** (recommended):
 
    ```bash
    npm publish --dry-run
    ```
 
-2. **Publish**: Release to npm registry
+4. **Publish**:
+
    ```bash
    npm publish
    ```
 
-### Post-publish Steps
-
-1. **Git Tag**: The `npm version` command automatically creates a git tag
-2. **Push Changes**: Push the version bump and tags to repository
-
+5. **Create and push git tag**:
    ```bash
-   git push origin main
-   git push origin --tags
+   git tag v$(node -p "require('./package.json').version")
+   git push origin main --tags
    ```
-
-3. **GitHub Release**: Create a release on GitHub with the changelog
 
 ### Package Contents
 
@@ -234,10 +312,25 @@ Only the `dist/` directory is included in the published package, as specified in
 
 ### Version Management
 
-- Follow [Semantic Versioning](https://semver.org/) (SemVer)
-- Patch (x.x.X): Bug fixes
-- Minor (x.X.x): New features (backward compatible)
-- Major (X.x.x): Breaking changes
+This project uses **Changesets** for automated [Semantic Versioning](https://semver.org/) (SemVer):
+
+- **Patch** (x.x.X): Bug fixes, documentation updates, internal improvements
+- **Minor** (x.X.x): New features, enhancements (backward compatible)
+- **Major** (X.x.x): Breaking changes, API changes
+
+#### How Changesets Determines Versions
+
+- Each changeset specifies the type of change (patch/minor/major)
+- When releasing, changesets aggregates all pending changes
+- The highest change type determines the final version bump
+- Example: If you have 5 patch changes and 1 minor change → minor version bump
+
+#### Changeset Files
+
+- Stored in `.changeset/` directory
+- Markdown files with metadata and description
+- Automatically consumed during version release
+- Used to generate `CHANGELOG.md` entries
 
 ## Development Environment
 
