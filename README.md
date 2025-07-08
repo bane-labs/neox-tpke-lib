@@ -11,11 +11,18 @@ NeoX TPKE provides cryptographic utilities for threshold encryption, allowing me
 
 ## Installation
 
+**npm:**
 ```bash
 npm install neox-tpke
-# or
+```
+
+**yarn:**
+```bash
 yarn add neox-tpke
-# or
+```
+
+**pnpm:**
+```bash
 pnpm add neox-tpke
 ```
 
@@ -112,4 +119,4 @@ const scaler = getScaler(consensusSize, threshold);
 
 ## License
 
-MIT
+[MIT](LICENSE) © Bane Labs
