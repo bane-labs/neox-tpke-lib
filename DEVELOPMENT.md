@@ -34,6 +34,7 @@ npm install
 This will install all dependencies including:
 
 **Runtime Dependencies:**
+
 - `@noble/curves`: Elliptic curve cryptography
 - `aes-js`: AES encryption implementation
 - `bigint-crypto-utils`: BigInt cryptographic utilities
@@ -41,6 +42,7 @@ This will install all dependencies including:
 - `viem`: Ethereum interaction library
 
 **Development Dependencies:**
+
 - `prettier`: Code formatting
 - `vite`: Build tool and development server
 - `vite-plugin-dts`: TypeScript declaration file generation
@@ -114,6 +116,7 @@ npm run test
 ### Test Configuration
 
 Tests are configured using Vitest with:
+
 - Global test functions enabled
 - TypeScript support
 - Fast execution and hot reloading during development
@@ -135,7 +138,7 @@ The project uses Prettier with configuration in `prettier.config.js`.
 Before committing changes:
 
 1. Run tests: `npm run test`
-2. Format code: `npm run format` 
+2. Format code: `npm run format`
 3. Build successfully: `npm run build`
 4. Ensure no TypeScript errors
 
@@ -154,13 +157,14 @@ Before committing changes:
 ### Pre-publish Steps
 
 1. **Update Version**: Increment the version number in `package.json`
+
    ```bash
    # For patch releases (bug fixes)
    npm version patch
-   
+
    # For minor releases (new features)
    npm version minor
-   
+
    # For major releases (breaking changes)
    npm version major
    ```
@@ -168,6 +172,7 @@ Before committing changes:
 2. **Update Changelog**: Document changes in [`CHANGELOG.md`](CHANGELOG.md)
 
 3. **Final Build**: Create a clean production build
+
    ```bash
    npm run build
    ```
@@ -180,6 +185,7 @@ Before committing changes:
 ### Publishing Process
 
 1. **Dry Run** (recommended): Test the publish process without actually publishing
+
    ```bash
    npm publish --dry-run
    ```
@@ -193,6 +199,7 @@ Before committing changes:
 
 1. **Git Tag**: The `npm version` command automatically creates a git tag
 2. **Push Changes**: Push the version bump and tags to repository
+
    ```bash
    git push origin main
    git push origin --tags
@@ -212,7 +219,7 @@ Only the `dist/` directory is included in the published package, as specified in
 
 ### Common Issues
 
-1. **Build Failures**: 
+1. **Build Failures**:
    - Check TypeScript errors: `npx tsc --noEmit`
    - Ensure all dependencies are installed: `npm install`
 
@@ -251,5 +258,6 @@ Only the `dist/` directory is included in the published package, as specified in
 ## Support
 
 For questions or issues:
+
 - Check existing GitHub issues
 - Create new issues for bugs or feature requests

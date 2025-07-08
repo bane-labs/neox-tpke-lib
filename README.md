@@ -12,16 +12,19 @@ NeoX TPKE provides cryptographic utilities for threshold encryption, allowing me
 ## Installation
 
 **npm:**
+
 ```bash
 npm install neox-tpke
 ```
 
 **yarn:**
+
 ```bash
 yarn add neox-tpke
 ```
 
 **pnpm:**
+
 ```bash
 pnpm add neox-tpke
 ```
@@ -44,7 +47,9 @@ import { toBytes } from 'viem';
 
 // From raw bytes
 const publicKey = PublicKey.fromBytes(
-  toBytes('0xa5aa188d1c60a7173e59fe49b68b969999e70aa4c1acb76c5a3dd2ad0d19a859b1a2759e3995ce1ceccdea5a57fbf637')
+  toBytes(
+    '0xa5aa188d1c60a7173e59fe49b68b969999e70aa4c1acb76c5a3dd2ad0d19a859b1a2759e3995ce1ceccdea5a57fbf637',
+  ),
 );
 
 // From aggregated commitment
@@ -54,10 +59,7 @@ const consensusSize = 7n;
 const threshold = getConsensusThreshold(consensusSize);
 const scaler = getScaler(consensusSize, threshold);
 
-const publicKey = PublicKey.fromAggregatedCommitment(
-  aggregatedCommitmentBytes,
-  scaler
-);
+const publicKey = PublicKey.fromAggregatedCommitment(aggregatedCommitmentBytes, scaler);
 ```
 
 ### Encrypting Messages
