@@ -2,9 +2,14 @@
   "name": "neox-tpke",
   "version": "1.0.5",
   "description": "Library for Threshold Public Key Encryption (TPKE) utilities in the NeoX ecosystem.",
+  "license": "MIT",
   "keywords": [
     "neox",
-    "tpke"
+    "tpke",
+    "neo",
+    "evm",
+    "anti-mev",
+    "defi"
   ],
   "repository": "https://github.com/bane-labs/neox-tpke-lib.git",
   "main": "dist/neox-tpke.umd.js",
