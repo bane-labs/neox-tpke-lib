@@ -1,7 +1,7 @@
 # NeoX TPKE
 
 [![npm version](https://img.shields.io/npm/v/neox-tpke.svg)](https://www.npmjs.com/package/neox-tpke)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A TypeScript library for Threshold Public Key Encryption (TPKE) utilities in the NeoX ecosystem.
 
@@ -121,4 +121,6 @@ const scaler = getScaler(consensusSize, threshold);
 
 ## License
 
-[MIT](LICENSE) © Bane Labs
+Licensed under the Apache License, Version 2.0. See the [LICENSE](./LICENSE) file for details.
+
+Copyright (c) 2025 Bane Labs
